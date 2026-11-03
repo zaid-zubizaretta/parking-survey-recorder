@@ -1,0 +1,11 @@
+{
+  "name": "Parking Survey Recorder",
+  "short_name": "Parking Survey",
+  "description": "Aplikasi pencatatan survei parkir offline",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f3f6fa",
+  "theme_color": "#17365d",
+  "icons": []
+}

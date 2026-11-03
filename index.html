@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#17365d">
+<title>Parking Survey Recorder</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <div class="brand-mark">P</div>
+    <div><h1>PARKING SURVEY</h1><p>VEHICLE RECORDING SYSTEM</p></div>
+  </div>
+  <div id="connection" class="status-pill">● OFFLINE READY</div>
+</header>
+
+<main>
+  <section id="setupPanel" class="panel">
+    <div class="section-heading"><div><span class="eyebrow">PENGATURAN SESI</span><h2>Mulai survei</h2></div><span class="step">01</span></div>
+    <p class="muted">Tentukan titik dan identitas surveyor satu kali. Pengaturan ini berlaku untuk seluruh catatan sampai sesi diubah.</p>
+    <label for="pointCode">Kode titik survei</label>
+    <input id="pointCode" type="text" maxlength="30" placeholder="Contoh: TNBTS-JEMPLANG" autocomplete="off">
+    <label for="surveyor">Nama / kode surveyor</label>
+    <input id="surveyor" type="text" maxlength="50" placeholder="Contoh: Surveyor 01" autocomplete="name">
+    <button id="startSession" class="primary full">MULAI / PERBARUI SESI</button>
+    <p class="tiny">Mengubah sesi tidak menghapus data yang sudah tersimpan. Catatan baru akan memakai titik dan surveyor yang aktif.</p>
+  </section>
+
+  <section id="activeSession" class="session-strip hidden">
+    <div><span class="eyebrow">SESI AKTIF</span><strong id="activePoint">-</strong><small id="activeSurveyor">-</small></div>
+    <button id="changeSession" class="ghost">Ubah sesi</button>
+  </section>
+
+  <section class="panel entry-panel">
+    <div class="section-heading"><div><span class="eyebrow">PENCATATAN KENDARAAN</span><h2>Input kendaraan</h2></div><span class="step">02</span></div>
+    <form id="entryForm">
+      <label for="plate">Plat nomor kendaraan</label>
+      <input id="plate" type="text" maxlength="15" placeholder="N 1234 AB" autocapitalize="characters" autocomplete="off" required>
+      <label>Kategori kendaraan</label>
+      <div class="choice-grid three">
+        <button type="button" class="choice" data-category="SM"><span class="choice-icon">🏍️</span><b>SM</b><small>Sepeda Motor</small></button>
+        <button type="button" class="choice" data-category="MP"><span class="choice-icon">🚗</span><b>MP</b><small>Mobil Penumpang</small></button>
+        <button type="button" class="choice" data-category="KB"><span class="choice-icon">🚚</span><b>KB</b><small>Kendaraan Berat</small></button>
+      </div>
+      <input id="category" type="hidden" required>
+      <label>Status kendaraan</label>
+      <div class="choice-grid two">
+        <button type="button" class="choice status-choice" data-status="MASUK"><span class="choice-icon">↘</span><b>MASUK</b></button>
+        <button type="button" class="choice status-choice" data-status="KELUAR"><span class="choice-icon">↗</span><b>KELUAR</b></button>
+      </div>
+      <input id="status" type="hidden" required>
+      <div class="field-row">
+        <div><label for="eventDate">Tanggal kejadian</label><input id="eventDate" type="date" required></div>
+        <div><label for="eventTime">Jam kejadian</label><input id="eventTime" type="time" step="1" required></div>
+      </div>
+      <div class="time-tools"><button type="button" id="setNow" class="ghost small">Gunakan waktu sekarang</button><span class="tiny">Default otomatis, dapat diedit.</span></div>
+      <button id="saveRecord" class="primary full save-button" type="submit">＋ SIMPAN / INPUT</button>
+      <p id="formMessage" class="form-message" role="status"></p>
+    </form>
+  </section>
+
+  <section class="stats-grid">
+    <div class="stat-card"><span>Total catatan</span><strong id="totalCount">0</strong></div>
+    <div class="stat-card"><span>Masuk</span><strong id="inCount">0</strong></div>
+    <div class="stat-card"><span>Keluar</span><strong id="outCount">0</strong></div>
+  </section>
+
+  <section class="panel">
+    <div class="section-heading"><div><span class="eyebrow">DATABASE LOKAL</span><h2>Catatan terbaru</h2></div><span class="step">03</span></div>
+    <div class="toolbar">
+      <input id="searchRecords" type="search" placeholder="Cari plat nomor..." aria-label="Cari plat nomor">
+      <button id="refreshRecords" class="ghost small">Muat ulang</button>
+    </div>
+    <div id="recordsList" class="records-list"><p class="empty">Belum ada catatan.</p></div>
+    <div class="export-grid">
+      <button id="exportCsv" class="secondary">Ekspor CSV</button>
+      <button id="exportJson" class="secondary">Backup JSON</button>
+      <label class="secondary import-label">Impor & gabungkan<input id="importJson" type="file" accept=".json,application/json" hidden></label>
+    </div>
+    <p class="tiny">Impor JSON menggabungkan data berdasarkan ID unik dan menghindari duplikasi. Simpan backup secara berkala.</p>
+  </section>
+  <section class="panel danger-zone">
+    <h3>Pengelolaan data</h3>
+    <p class="tiny">Penghapusan seluruh data bersifat permanen pada perangkat ini. Ekspor backup sebelum menghapus.</p>
+    <button id="clearData" class="danger full">Hapus seluruh database lokal</button>
+  </section>
+</main>
+<footer>Parking Survey Recorder · Penyimpanan lokal perangkat</footer>
+<script src="app.js"></script>
+</body>
+</html>
