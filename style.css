@@ -10,7 +10,7 @@ main{max-width:620px;margin:16px auto;padding:0 12px}.panel{background:#fff;bord
 input{width:100%;border:1px solid #cbd5e1;border-radius:10px;padding:13px 12px;font-size:16px;color:var(--ink);background:#fff;min-width:0}input:focus{outline:2px solid #9bc3e3;border-color:var(--blue)}
 button,.secondary,.import-label{font:inherit;cursor:pointer;border:0;border-radius:10px;font-weight:700}
 .primary{background:var(--navy);color:#fff;padding:14px 16px;font-size:14px}.full{width:100%;margin-top:15px}.primary:active{transform:scale(.99)}
-.choice-grid{display:grid;gap:8px}.three{grid-template-columns:repeat(3,1fr)}.two{grid-template-columns:repeat(2,1fr)}
+.choice-grid{display:grid;gap:8px}.three{grid-template-columns:repeat(3,1fr)}.four{grid-template-columns:repeat(2,minmax(0,1fr))}.two{grid-template-columns:repeat(2,1fr)}
 .choice{background:#fff;border:1.5px solid var(--line);padding:11px 5px;display:flex;flex-direction:column;align-items:center;gap:4px;color:var(--ink);min-height:82px}
 .choice-icon{font-size:22px}.choice b{font-size:14px}.choice small{font-size:10px;color:var(--muted);text-align:center}
 .choice.selected{border:2px solid var(--blue);background:#edf6fc;color:var(--navy)}.status-choice{min-height:58px;flex-direction:row;justify-content:center;font-size:15px}.status-choice[data-status="MASUK"].selected{background:var(--green);border-color:#4b9b5d;color:var(--green-ink)}.status-choice[data-status="KELUAR"].selected{background:var(--amber);border-color:#d7a33a;color:var(--amber-ink)}
